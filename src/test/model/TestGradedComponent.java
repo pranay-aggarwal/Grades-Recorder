@@ -30,7 +30,7 @@ public class TestGradedComponent {
 
     @Test
     public void testToString(){
-        assertEquals("Component Name: quiz Marks: 80.0 Weightage: 15.0",GC1.toString());
+        assertEquals("    Component Name: quiz Marks: 80.0 Weightage: 15.0",GC1.toString());
     }
 
 

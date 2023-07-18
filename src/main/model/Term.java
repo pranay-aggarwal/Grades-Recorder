@@ -17,7 +17,7 @@ public class Term {
     public Term(int year, int termNum) {
         this.year = year;
         this.termNum = termNum;
-        this.subjects = new ArrayList<Subject>();
+        this.subjects = new ArrayList<>();
     }
 
 
@@ -40,7 +40,6 @@ public class Term {
 
 
 
-
     //EFFECTS : returns the output of subjects class for the user
     public String toStringSubjects(ArrayList<Subject> subjects) {
         String result = "";
@@ -53,22 +52,35 @@ public class Term {
 
     //EFFECTS : returns the output of term class for the user
     public String toString() {
-        return "Year: " + year + " Term Number: " + termNum + "\n"
-                + toStringSubjects(subjects);
+        return "-------------------------------------------------------" + "\n"
+                + "Year: " + year + " Term Number: " + termNum + "\n"
+                + "-------------------------------------------------------" + "\n"
+                + toStringSubjects(subjects)
+
+
+
+                ;
     }
 
 
-    ////
+    //// setters
+
+    // MODIFIES: this
+    // EFFECTS : sets the value of year to the given value
     public void setYear(int year) {
         this.year = year;
     }
 
 
+    // MODIFIES: this
+    // EFFECTS : sets the value of termNum to the given value
     public void setTermNum(int termNum) {
         this.termNum = termNum;
     }
 
 
+    // MODIFIES: this
+    // EFFECTS : sets the value of subjects to the given value
     public void setSubjects(ArrayList<Subject> subjects) {
         this.subjects = subjects;
     }
@@ -77,17 +89,19 @@ public class Term {
 
 
 
-    ////
+    //// getters
+
+    // EFFECTS : returns the value of year
     public int getYear() {
         return year;
     }
 
-
+    // EFFECTS : returns the value of termNum
     public int getTermNum() {
         return termNum;
     }
 
-
+    // EFFECTS : returns the value of subjects
     public ArrayList<Subject> getSubjects() {
         return subjects;
     }

@@ -174,9 +174,9 @@ public class StartYear {
         System.out.println("Enter the weightage: ");
         double weight = input.nextFloat();
         GradedComponent gradedComponent = new GradedComponent(compName, marks, weight);
-        ArrayList<GradedComponent> result = s.getListGradedComp();
+        ArrayList<GradedComponent> result = s.getListOfGradedComp();
         result.add(gradedComponent);
-        s.setListGradedComp(result);
+        s.setListOfGradedComp(result);
     }
 
 

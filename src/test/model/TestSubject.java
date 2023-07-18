@@ -47,7 +47,7 @@ public class TestSubject {
 
     @Test
     public void testAddGradedComp() {
-        assertEquals(4, Sub1.getListGradedComp().size());
+        assertEquals(4, Sub1.getListOfGradedComp().size());
     }
 
 
@@ -70,12 +70,15 @@ public class TestSubject {
 
     @Test
     public void testToString(){
-        assertEquals("CPSC210: Expected Marks: 95.0\n" +
-                "Component Name: quiz1 Marks: 80.0 Weightage: 15.0\n" +
-                "Component Name: quiz2 Marks: 85.0 Weightage: 15.0\n" +
-                "Component Name: midterm Marks: 75.0 Weightage: 30.0\n" +
-                "Component Name: finals Marks: 90.0 Weightage: 40.0\n", Sub1.toString());
+        assertEquals("> CPSC210: Expected Marks: 95.0\n" +
+                "    Component Name: quiz1 Marks: 80.0 Weightage: 15.0\n" +
+                "    Component Name: quiz2 Marks: 85.0 Weightage: 15.0\n" +
+                "    Component Name: midterm Marks: 75.0 Weightage: 30.0\n" +
+                "    Component Name: finals Marks: 90.0 Weightage: 40.0\n", Sub1.toString());
     }
+
+
+
 
 
     @Test
@@ -96,8 +99,8 @@ public class TestSubject {
         sampleList.add(GC4);
         sampleList.add(GC5);
         sampleList.add(GC6);
-        Sub1.setListGradedComp(sampleList);
-        assertEquals(sampleList, Sub1.getListGradedComp());
+        Sub1.setListOfGradedComp(sampleList);
+        assertEquals(sampleList, Sub1.getListOfGradedComp());
 
 
     }

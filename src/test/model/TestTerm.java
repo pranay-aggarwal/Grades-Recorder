@@ -75,10 +75,10 @@ public class TestTerm {
     void testToStringSubjects(){
         ArrayList<Subject> L1 = new ArrayList<>();
         L1.add(Sub1);
-        assertEquals("CPSC210: Expected Marks: 95.0\n" +
-                "Component Name: quiz Marks: 90.0 Weightage: 30.0\n" +
-                "Component Name: midterm Marks: 85.0 Weightage: 30.0\n" +
-                "Component Name: finals Marks: 80.0 Weightage: 40.0\n",T1.toStringSubjects(L1));
+        assertEquals("> CPSC210: Expected Marks: 95.0\n" +
+                "    Component Name: quiz Marks: 90.0 Weightage: 30.0\n" +
+                "    Component Name: midterm Marks: 85.0 Weightage: 30.0\n" +
+                "    Component Name: finals Marks: 80.0 Weightage: 40.0\n",T1.toStringSubjects(L1));
 
 
     }
@@ -86,11 +86,13 @@ public class TestTerm {
 
     @Test
     void testToString(){
-        assertEquals("Year: 2023 Term Number: 1\n" +
-                "CPSC210: Expected Marks: 95.0\n" +
-                "Component Name: quiz Marks: 90.0 Weightage: 30.0\n" +
-                "Component Name: midterm Marks: 85.0 Weightage: 30.0\n" +
-                "Component Name: finals Marks: 80.0 Weightage: 40.0\n",T1.toString());
+        assertEquals("-------------------------------------------------------\n" +
+                "Year: 2023 Term Number: 1\n" +
+                "-------------------------------------------------------\n" +
+                "> CPSC210: Expected Marks: 95.0\n" +
+                "    Component Name: quiz Marks: 90.0 Weightage: 30.0\n" +
+                "    Component Name: midterm Marks: 85.0 Weightage: 30.0\n" +
+                "    Component Name: finals Marks: 80.0 Weightage: 40.0\n",T1.toString());
     }
 
 

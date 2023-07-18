@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Subject {
     private String subName;
     private double expectedMarks;
-    private ArrayList<GradedComponent> listGradedComp;
+    private ArrayList<GradedComponent> listOfGradedComp;
 
 
     //REQUIRE : A non-zero subName and a positive expectedMarks
@@ -17,7 +17,7 @@ public class Subject {
     public Subject(String subName, double expectedMarks) {
         this.subName = subName;
         this.expectedMarks = expectedMarks;
-        this.listGradedComp = new ArrayList<>();
+        this.listOfGradedComp = new ArrayList<>();
     }
 
 
@@ -26,14 +26,14 @@ public class Subject {
     //MODIFIES: this
     //EFFECTS : add a new Graded Component to the Term
     public void addGradedComp(GradedComponent component) {
-        this.listGradedComp.add(component);
+        this.listOfGradedComp.add(component);
     }
 
 
     //EFFECTS : returns the average of all the Graded Components in the subject
     public double averageGradedComp() {
         double sum = 0;
-        for (GradedComponent g: listGradedComp) {
+        for (GradedComponent g: listOfGradedComp) {
             sum += g.getWeightage() * g.getMarks() / 100.0;
         }
         return sum;
@@ -44,7 +44,7 @@ public class Subject {
 
     //EFFECTS : return the marks needed to meet the expected marks
     public double expectedRequirement() {
-        double req = 0;
+        double req;
         if (this.expectedMarks >= this.averageGradedComp()) {
             req = this.expectedMarks - this.averageGradedComp();
             return req;
@@ -57,26 +57,33 @@ public class Subject {
 
     //EFFECTS : returns the output of subjects class for the user
     public String toString() {
-        String result = subName + ":" + " Expected Marks: " + expectedMarks;
+        String result = "> " + subName + ":" + " Expected Marks: " + expectedMarks;
         String result1 = "\n";
-        for (GradedComponent gradedComponent: listGradedComp) {
+        for (GradedComponent gradedComponent: listOfGradedComp) {
             result1 += gradedComponent.toString() + "\n";
         }
         return result + result1;
     }
 
 
-    ////
+    //// setters
+
+    // MODIFIES: this
+    // EFFECTS : sets the value of subName to the given value
     public void setSubName(String subName) {
         this.subName = subName;
     }
 
 
-    public void setListGradedComp(ArrayList<GradedComponent> listGradedComp) {
-        this.listGradedComp = listGradedComp;
+    // MODIFIES: this
+    // EFFECTS : sets the value of listOfGradedComp to the given value
+    public void setListOfGradedComp(ArrayList<GradedComponent> listOfGradedComp) {
+        this.listOfGradedComp = listOfGradedComp;
     }
 
 
+    // MODIFIES: this
+    // EFFECTS : sets the value of expectedMarks to the given value
     public void setExpectedMarks(double expectedMarks) {
         this.expectedMarks = expectedMarks;
     }
@@ -85,17 +92,19 @@ public class Subject {
 
 
 
-    ////
+    //// getters
+
+    // EFFECTS : returns the value of subName
     public String getSubName() {
         return subName;
     }
 
-
-    public ArrayList<GradedComponent> getListGradedComp() {
-        return listGradedComp;
+    // EFFECTS : returns the value of listOfGradedComp
+    public ArrayList<GradedComponent> getListOfGradedComp() {
+        return listOfGradedComp;
     }
 
-
+    // EFFECTS : returns the value of expectedMarks
     public double getExpectedMarks() {
         return expectedMarks;
     }
