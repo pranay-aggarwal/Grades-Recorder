@@ -1,6 +1,8 @@
 package model;
 
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +12,9 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * This is a test class for Term
+ */
 
 public class TestTerm {
     private Term T1;
@@ -24,7 +29,7 @@ public class TestTerm {
 
 
     @BeforeEach
-    void runBeforeEach(){
+    public void runBeforeEach(){
         T1 = new Term(2023,1);
 
 
@@ -49,14 +54,14 @@ public class TestTerm {
 
 
     @Test
-    void testConstructor(){
+    public void testConstructor(){
         assertEquals(2023, T1.getYear());
         assertEquals(1, T1.getTermNum());
     }
 
 
     @Test
-    void testAddSubject (){
+    public void testAddSubject (){
         assertEquals (1, T1.getSubjects().size());
         T1.addSubject(Sub2);
         assertEquals (2, T1.getSubjects().size());
@@ -64,7 +69,7 @@ public class TestTerm {
 
 
     @Test
-    void testAverageSub (){
+    public void testAverageSub (){
         assertEquals (84.5, T1.averageSub());
         T1.addSubject(Sub2);
         assertEquals (85.5, T1.averageSub());
@@ -72,7 +77,7 @@ public class TestTerm {
 
 
     @Test
-    void testToStringSubjects(){
+    public void testToStringSubjects(){
         ArrayList<Subject> L1 = new ArrayList<>();
         L1.add(Sub1);
         assertEquals("> CPSC210: Expected Marks: 95.0\n" +
@@ -85,7 +90,7 @@ public class TestTerm {
 
 
     @Test
-    void testToString(){
+    public void testToString(){
         assertEquals("-------------------------------------------------------\n" +
                 "Year: 2023 Term Number: 1\n" +
                 "-------------------------------------------------------\n" +
@@ -97,27 +102,53 @@ public class TestTerm {
 
 
     @Test
-    void testSetYear(){
+    public void testSetYear(){
         T1.setYear(2022);
         assertEquals(2022,T1.getYear());
     }
 
 
     @Test
-    void testSetTermNum(){
+    public void testSetTermNum(){
         T1.setTermNum(2);
         assertEquals(2,T1.getTermNum());
     }
 
 
     @Test
-    void testSetSubjects(){
+    public void testSetSubjects(){
         ArrayList<Subject> sampleList = new ArrayList<>();
         sampleList.add(Sub1);
         sampleList.add(Sub2);
         T1.addSubject(Sub2);
         T1.setSubjects(sampleList);
         assertEquals(sampleList,T1.getSubjects());
+    }
+
+
+    @Test
+    public void testToJson(){
+        Term term = new Term(2023,1);
+        Subject subject = new Subject("CPSC210", 85);
+        GradedComponent gradedComponent = new GradedComponent("Quiz", 85, 15);
+        ArrayList<GradedComponent> listOfGC = new ArrayList<>();
+        listOfGC.add(gradedComponent);
+        subject.setListOfGradedComp(listOfGC);
+        ArrayList<Subject> listOfSub = new ArrayList<>();
+        listOfSub.add(subject);
+        term.setSubjects(listOfSub);
+
+        JSONObject expected = new JSONObject();
+        expected.put("year", 2023);
+        expected.put("termNum", 1);
+
+        JSONArray termList = new JSONArray();
+        for (Subject s : term.getSubjects()) {
+            termList.put(s.toJson());
+        }
+        expected.put("subjects", termList);
+        JSONObject actualJson = term.toJson();
+        assertEquals(expected.toString(),actualJson.toString());
     }
 
 

@@ -1,11 +1,21 @@
 package model;
 
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 import java.util.ArrayList;
 
 
+/**
+ * This class represents a subject in an academic term.
+ * It contains information about the subject's name,
+ * the expected marks for the subject, and a list of graded components
+ * that contribute to the subject's final grade.
+ */
+
 // Create a new Subject for the term
-public class Subject {
+public class Subject implements Writable {
     private String subName;
     private double expectedMarks;
     private ArrayList<GradedComponent> listOfGradedComp;
@@ -74,19 +84,18 @@ public class Subject {
         this.subName = subName;
     }
 
-
     // MODIFIES: this
     // EFFECTS : sets the value of listOfGradedComp to the given value
     public void setListOfGradedComp(ArrayList<GradedComponent> listOfGradedComp) {
         this.listOfGradedComp = listOfGradedComp;
     }
 
-
     // MODIFIES: this
     // EFFECTS : sets the value of expectedMarks to the given value
     public void setExpectedMarks(double expectedMarks) {
         this.expectedMarks = expectedMarks;
     }
+
     ////
 
 
@@ -108,7 +117,24 @@ public class Subject {
     public double getExpectedMarks() {
         return expectedMarks;
     }
+
     ////
+
+
+    // Persistence code
+    @Override
+    public JSONObject toJson() {
+        JSONObject result = new JSONObject();
+        result.put("subName", subName);
+        result.put("expectedMarks", expectedMarks);
+        JSONArray marksArray = new JSONArray();
+        for (GradedComponent gc : getListOfGradedComp()) {
+            marksArray.put(gc.toJson());
+        }
+        result.put("gradedComps", marksArray);
+        return result;
+    }
+
 
 
 

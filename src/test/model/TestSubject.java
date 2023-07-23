@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +11,9 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This is a test class for Subject
+ */
 
 public class TestSubject {
     private Subject Sub1;
@@ -108,6 +113,31 @@ public class TestSubject {
     public void tesSetExpectedMarks(){
         Sub1.setExpectedMarks(70);
         assertEquals(70,Sub1.getExpectedMarks());
+    }
+
+
+    @Test
+    public void testToJson() {
+        Subject subject = new Subject("CPSC210", 85);
+        GradedComponent gradedComponent = new GradedComponent("Quiz", 85, 15);
+        ArrayList<GradedComponent> listOfGC = new ArrayList<>();
+        listOfGC.add(gradedComponent);
+        subject.setListOfGradedComp(listOfGC);
+
+
+        JSONObject expectedJson = new JSONObject();
+        expectedJson.put("subName", "CPSC210");
+        expectedJson.put("expectedMarks", 85);
+
+        JSONArray marksArray = new JSONArray();
+        for (GradedComponent gc : subject.getListOfGradedComp()) {
+            marksArray.put(gc.toJson());
+        }
+        expectedJson.put("gradedComps", marksArray);
+
+        JSONObject actualJson = subject.toJson();
+        assertEquals(expectedJson.toString(), actualJson.toString());
+
     }
 
 

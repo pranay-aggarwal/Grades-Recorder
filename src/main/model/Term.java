@@ -1,11 +1,21 @@
 package model;
 
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
+
+/**
+ * This class represents an academic term in a school year.
+ * It contains information about the term's year, term number,
+ * and a list of subjects offered during that term.
+*/
 
 
 // Create a new Term
-public class Term {
+public class Term implements Writable {
     private int year;
     private int termNum;
     private ArrayList<Subject> subjects;
@@ -105,6 +115,21 @@ public class Term {
     public ArrayList<Subject> getSubjects() {
         return subjects;
     }
+
     ////
+
+    // Persistence Code
+    @Override
+    public JSONObject toJson() {
+        JSONObject result = new JSONObject();
+        result.put("year", year);
+        result.put("termNum", termNum);
+        JSONArray termList = new JSONArray();
+        for (Subject s : getSubjects()) {
+            termList.put(s.toJson());
+        }
+        result.put("subjects", termList);
+        return result;
+    }
 }
 

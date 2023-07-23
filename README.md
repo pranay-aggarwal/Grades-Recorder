@@ -29,3 +29,5 @@ the hassle of storing all of this information in my memory.
 - **As a user,** I want to be able to *add* my expected score in this course.
 - **As a user,** I want to be able to *get* an average percentage of my term.
 - **As a user,** I want to be able to *view* the marks I need to obtain to achieve my desired percentage.
+- **As a user,** I want to be able to *save* my entire transcript so far.
+- **As a user,** I want to be able to *load* my previously saved transcript.

@@ -4,11 +4,19 @@ package ui;
 import model.GradedComponent;
 import model.Subject;
 import model.Term;
+import persistence.TermFileHandler;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+/**
+ * This class represents the main application for the Grade Tracker.
+ * It allows users to interact with the application through a menu-driven console interface.
+ */
+
 
 
 // StartYear application
@@ -17,12 +25,14 @@ public class StartYear {
 
 
     List<Term> terms = new ArrayList<>();
+    final String filePath = "data/data.json";
     ArrayList<Subject> existingSubjects = new ArrayList<>();
-
+    TermFileHandler fileHandler = new TermFileHandler(filePath);
 
     // EFFECT: call the StartYear app and display possible menu options
-    public StartYear() {
+    public StartYear() throws IOException {
         displayMenu();
+        System.out.println("NOTE: Load the data before running the application else you may loose your progress");
     }
 
 
@@ -37,7 +47,9 @@ public class StartYear {
         System.out.println("5 -> Calculate the Average of a single Subject");
         System.out.println("6 -> Calculate marks needed for expected score");
         System.out.println("7 -> Display result");
-        System.out.println("Any other key -> Quit");
+        System.out.println("8 -> Save Data");
+        System.out.println("9 -> Load Data");
+        System.out.println("Any other option -> Quit");
         System.out.println("===========================================================");
 
 
@@ -45,13 +57,11 @@ public class StartYear {
 
 
     // EFFECT: Displays the function menu and input a valid option
-    public void displayMenu() {
-
+    public void displayMenu() throws IOException {
 
         while (true) {
             printOut();
             int option = input.nextInt();
-
 
             if (option == 1) {
                 createTerm();
@@ -68,11 +78,23 @@ public class StartYear {
             } else if (option == 7) {
                 displayResults();
             } else {
-                System.out.println("Exiting the application.....");
-                System.exit(13);
+                saveAndLoadData(option);
             }
         }
     }
+
+    // EFFECTS : runs the save and load menu
+    private void saveAndLoadData(int option) throws IOException {
+        if (option == 8) {
+            saveData();
+        } else if (option == 9) {
+            loadData();
+        } else {
+            System.out.println("Exiting the application....");
+            System.exit(69);
+        }
+    }
+
 
 
     // EFFECT : Creates a new Term
@@ -265,14 +287,26 @@ public class StartYear {
     }
 
 
-
-
-    // EFFECT: Display the results of the operations
+    // EFFECTS : Display the results of the operations
     private void displayResults() {
         String result = "";
         for (Term term : terms) {
             result += term.toString();
         }
         System.out.println(result);
+    }
+
+    // EFFECTS : Saves the data in the given file path
+    public void saveData() throws IOException {
+        fileHandler.writeTermToFile(terms);
+        System.out.println("Data saved successfully");
+    }
+
+
+    // MODIFIES: this
+    // EFFECTS : Loads the data from the given file path
+    public void loadData() throws IOException {
+        terms = fileHandler.readTermFromFile();
+        System.out.println("Loaded Data Successfully");
     }
 }

@@ -1,10 +1,17 @@
 package model;
 
 
+import org.json.JSONObject;
+import persistence.Writable;
 
+/**
+ * This class represents a graded component within an academic subject.
+ * It contains information about the component's name, marks obtained,
+ * and weightage in the overall subject grade.
+ */
 
 // Create a new Graded Component for a subject
-public class GradedComponent {
+public class GradedComponent implements Writable {
     private String compName;
     private double marks;
     private double weightage;
@@ -67,7 +74,19 @@ public class GradedComponent {
     public String getCompName() {
         return compName;
     }
+
+    ////
+
+    // Persistence code
+    @Override
+    public JSONObject toJson() {
+        JSONObject result = new JSONObject();
+        result.put("compName", compName);
+        result.put("marks", marks);
+        result.put("weightage", weightage);
+        return result;
+    }
 }
 
-////
+
 

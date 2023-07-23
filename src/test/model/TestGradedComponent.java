@@ -1,12 +1,17 @@
 package model;
 
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This is a test class for GradedComponent
+ */
 
 public class TestGradedComponent {
 
@@ -55,6 +60,17 @@ public class TestGradedComponent {
     }
 
 
+    @Test
+    public void testToJson(){
+        GradedComponent gradedComponent = new GradedComponent("Quiz", 85, 15);
+        JSONObject expectedJson = new JSONObject();
+        expectedJson.put("marks", 85);
+        expectedJson.put("compName", "Quiz");
+        expectedJson.put("weightage", 15);
+        JSONObject actualJson = gradedComponent.toJson();
+        assertEquals(expectedJson.toString(), actualJson.toString());
+
+    }
 
 
 }
