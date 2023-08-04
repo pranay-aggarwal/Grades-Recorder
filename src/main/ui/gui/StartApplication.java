@@ -121,14 +121,14 @@ public class StartApplication extends JFrame {
         Font font = new Font("Arial", Font.ITALIC, 26);
         addSub.setFont(font);
         addSub.setPreferredSize(new Dimension(650, buttonHeight));
-//        addSub.addActionListener(e -> {
-//            try {
-//                dispose();
-//                new AddSubGUI();
-//            } catch (IOException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//        });
+        addSub.addActionListener(e -> {
+            try {
+                dispose();
+                new AddSubGUI();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         return addSub;
     }
 
@@ -137,7 +137,14 @@ public class StartApplication extends JFrame {
         Font font = new Font("Arial", Font.ITALIC, 26);
         addGC.setFont(font);
         addGC.setPreferredSize(new Dimension(650, buttonHeight));
-
+        addGC.addActionListener(e -> {
+            try {
+                dispose();
+                new AddGcGUI();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         return addGC;
 
     }

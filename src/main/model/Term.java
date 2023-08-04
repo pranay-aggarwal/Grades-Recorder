@@ -131,5 +131,29 @@ public class Term implements Writable {
         result.put("subjects", termList);
         return result;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Term)) {
+            return false;
+        }
+
+        Term term = (Term) o;
+
+        if (year != term.year) {
+            return false;
+        }
+        return termNum == term.termNum;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = year;
+        result = 31 * result + termNum;
+        return result;
+    }
 }
 

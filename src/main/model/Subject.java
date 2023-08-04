@@ -136,9 +136,24 @@ public class Subject implements Writable {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Subject)) {
+            return false;
+        }
 
+        Subject subject = (Subject) o;
 
+        return subName.equals(subject.subName);
+    }
 
+    @Override
+    public int hashCode() {
+        return subName.hashCode();
+    }
 }
 
 
