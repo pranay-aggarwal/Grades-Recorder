@@ -10,10 +10,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+/**
+ * The AddGcGUI class represents the graphical user interface (GUI) for adding a new graded component (GC)
+ * to an existing subject within a specific term in the Transcript Record application.
+ * It extends the StartApplication class
+ * The class prompts the user to enter the term and subject details and if found, a new GC is created and
+ * added to the subject's graded component list.
+ * It also provides an option to save the updated data to a file upon successful addition.
+ */
+
+
 public class AddGcGUI extends StartApplication {
     Term term;
     String subName;
 
+    //EFFECTS : Creates a new popup window to input the term details to verify
     public AddGcGUI() throws IOException {
         super();
         JFrame frame = new JFrame("Check Term");
@@ -31,11 +42,16 @@ public class AddGcGUI extends StartApplication {
         makePanel(yearLabel, yearField, termNumLabel, termNumField, submitButton, frame);
     }
 
+    // MODIFIES: this
+    // EFFECTS : makes the fields editable.
     private void makeEditable(JTextField field1, JTextField field2) {
         field1.setEditable(true);
         field2.setEditable(true);
     }
 
+    // REQUIRES: all the JTextFields and JFrame
+    // MODIFIES: this
+    // EFFECTS: handles the term fields and creates a popup for subject fields
     private void handleTerm(JTextField yearField, JTextField termNumField, JFrame frame) {
         int year = Integer.parseInt(yearField.getText());
         int termNum = Integer.parseInt(termNumField.getText());
@@ -48,6 +64,8 @@ public class AddGcGUI extends StartApplication {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates the popup for the subject details
     private void addSubWindow() {
         JFrame frame = new JFrame("Check existing Subject");
         JLabel nameLabel = new JLabel("Name of Subject:");
@@ -62,11 +80,16 @@ public class AddGcGUI extends StartApplication {
         makePanelSub(nameLabel, nameField, submitButton, frame);
     }
 
+    // MODIFIES: this
+    // EFFECTS : makes the fields editable.
     public void makeEditableSub(JTextField name) {
         name.setEditable(true);
     }
 
 
+    // REQUIRES: all the JTextFields and JFrame
+    // MODIFIES: this
+    // EFFECTS: handles the subject fields and creates a popup for GC fields
     private void handleSub(JTextField nameField, JFrame frame) {
         subName = nameField.getText();
 
@@ -77,10 +100,10 @@ public class AddGcGUI extends StartApplication {
                 }
             }
         }
-//        JOptionPane.showMessageDialog(frame, "Subject not found", "Failure",
-//                    JOptionPane.INFORMATION_MESSAGE);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates the popup for the GC details
     private void addGCWindow() {
         JFrame frame = new JFrame("Add Graded Component");
         JLabel nameLabel = new JLabel("Name of Graded Component:");
@@ -99,6 +122,8 @@ public class AddGcGUI extends StartApplication {
         makePanelGC(nameLabel, nameField, marksLabel, marksField, weightageLabel, weightageField, submitButton, frame);
     }
 
+    // MODIFIES: this
+    // EFFECTS : makes the fields editable.
     private void makeEditableGC(JTextField field1, JTextField field2, JTextField field3) {
         field1.setEditable(true);
         field2.setEditable(true);
@@ -107,6 +132,9 @@ public class AddGcGUI extends StartApplication {
     }
 
 
+    // REQUIRES: all the JTextFields and JFrame
+    // MODIFIES: this
+    // EFFECTS: handles the GC fields and creates a new GC
     private void handleGC(JTextField nameField, JTextField marksField, JTextField weightField, JFrame frame) {
         String name = nameField.getText();
         double marks = Double.parseDouble(marksField.getText());
@@ -128,7 +156,8 @@ public class AddGcGUI extends StartApplication {
 
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: displays the appropriate message to the user after saving the data
     private void addGCSuccessMessage(JFrame frame) {
         JOptionPane.showMessageDialog(frame, "Graded Component added successfully!", "Success",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -145,6 +174,8 @@ public class AddGcGUI extends StartApplication {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS : makes the panel for the subject popup window
     private void makePanelSub(JLabel nameLabel, JTextField nameField,
                               JButton submitButton,
                               JFrame frame) {
@@ -157,6 +188,8 @@ public class AddGcGUI extends StartApplication {
         frame.setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS : makes the panel for the GC popup window
     private void makePanelGC(JLabel nameLabel, JTextField nameField,
                            JLabel marksLabel, JTextField marksField,
                            JLabel weightLabel, JTextField weightField,
@@ -176,7 +209,8 @@ public class AddGcGUI extends StartApplication {
         frame.setVisible(true);
     }
 
-
+    // MODIFIES: this
+    // EFFECTS : makes the panel for the term popup window
     private void makePanel(JLabel nameLabel, JTextField nameField,
                            JLabel marksLabel, JTextField marksField,
                            JButton submitButton,

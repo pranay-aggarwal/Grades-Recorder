@@ -9,9 +9,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+
+/**
+ * The AddSubGUI class represents the graphical user interface (GUI) for adding a new subject to an existing term
+ * in the Transcript Record application. It extends the StartApplication class.
+ * The class first prompts the user to enter the term year and term number to find the relevant term.
+ * If the term is found, it provides input fields for the user to enter the subject details.
+ * Upon submitting the subject data, the class handles adding the subject to the term's subject list.
+ * It also gives an option to save the updated data to a file upon successful addition.
+ */
+
 public class AddSubGUI extends StartApplication {
     Term term;
 
+    //EFFECTS : Creates a new popup window to input the term details to verify
     public AddSubGUI() throws IOException {
         super();
         JFrame frame = new JFrame("Check Term");
@@ -31,11 +42,17 @@ public class AddSubGUI extends StartApplication {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS : makes the fields editable.
     private void makeEditable(JTextField field1, JTextField field2) {
         field1.setEditable(true);
         field2.setEditable(true);
     }
 
+
+    // REQUIRES: all the JTextFields and JFrame
+    // MODIFIES: this
+    // EFFECTS: handles the term fields and creates a popup for subject fields
     private void handleTerm(JTextField yearField, JTextField termNumField, JFrame frame) {
         int year = Integer.parseInt(yearField.getText());
         int termNum = Integer.parseInt(termNumField.getText());
@@ -48,6 +65,8 @@ public class AddSubGUI extends StartApplication {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates the popup for the subject details
     private void addWindow() {
         JFrame frame = new JFrame("Add Subject");
         JLabel nameLabel = new JLabel("Name of Subject:");
@@ -66,7 +85,9 @@ public class AddSubGUI extends StartApplication {
 
 
 
-
+    // REQUIRES: all the JTextFields and JFrame
+    // MODIFIES: this
+    // EFFECTS: handles the subject fields and creates a new subject
     private void handleSub(JTextField nameField, JTextField marksField, JFrame frame) {
         String name = nameField.getText();
         int marks = Integer.parseInt(marksField.getText());
@@ -85,7 +106,8 @@ public class AddSubGUI extends StartApplication {
 
 
 
-
+    // MODIFIES: this
+    // EFFECTS: displays the appropriate message to the user after saving the data
     private void addSubSuccessMessage(JFrame frame) {
         JOptionPane.showMessageDialog(frame, "Subject added successfully!", "Success",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -103,7 +125,8 @@ public class AddSubGUI extends StartApplication {
     }
 
 
-
+    // MODIFIES: this
+    // EFFECTS : makes the panel for the popup window
     private void makePanel(JLabel nameLabel, JTextField nameField,
                            JLabel marksLabel, JTextField marksField,
                            JButton submitButton,

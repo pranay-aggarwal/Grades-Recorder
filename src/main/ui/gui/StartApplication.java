@@ -1,35 +1,37 @@
 package ui.gui;
 
-import model.Subject;
 import model.Term;
 import persistence.TermFileHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StartApplication extends JFrame {
 
+/**
+ * The StartApplication class represents the main graphical user interface (GUI) for the Transcript Record application.
+ * It extends JFrame to create the application window and contains various buttons for user interaction.
+ * Contains various features such as add user data, save and load data, display data and calculate the Term average
+ */
+public class StartApplication extends JFrame {
     private JButton loadTerm;
     private JButton addTerm;
     private JButton addSub;
     private JButton addGC;
     private JButton displayTranscript;
-    protected final int dimX = 800; // represents the width of the JFrame
-    protected final int dimY = 1000; // represents the height of the JFrame
-    private int buttonHeight = 100;
+    private JButton termAverage;
+    protected final int dimX = 1920; // represents the width of the JFrame
+    protected final int dimY = 1080; // represents the height of the JFrame
+    private int buttonHeight = 80;
 
-
-    private final String termPath = "./data/data.json";
-    protected List<Term> termList = new ArrayList<>(); // stores the patients made
-
+    protected final String termPath = "./data/data.json";
     protected TermFileHandler termFile = new TermFileHandler(termPath);
 
+    protected static List<Term> termList = new ArrayList<>();
 
+    // EFFECTS: Creates the panel of the app
     public StartApplication() throws IOException {
         this.setTitle("Transcript Record");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,25 +42,24 @@ public class StartApplication extends JFrame {
         this.setSize(dimX, dimY);
         JPanel panel = addPanel();
         panel.setBackground(Color.decode("#00003f"));
-        this.add(panel);
 
-        try {
-            termList.addAll(termFile.readTermFromFile());
-        } catch (IOException ex) {
-            System.out.println("Error: " + ex.getMessage());
-        }
+        this.add(panel);
     }
 
 
+    // MODIFIES: this
+    // EFFECTS: Adds relevant buttons and labels on the panel
     private JPanel addPanel() throws IOException {
         JPanel res = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.insets = new Insets(5, 5, 5, 5);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weighty = 1.0;
         gbc.weightx = 1.0;
+
         gbc.anchor = GridBagConstraints.CENTER;
+        gbc.gridx++;
         res.add(addWelcomeLabel(), gbc);
         gbc.gridy++;
         res.add(loadDataButton(), gbc);
@@ -69,13 +70,17 @@ public class StartApplication extends JFrame {
         gbc.gridy++;
         res.add(addGCButton(), gbc);
         gbc.gridy++;
+        res.add(termAverage(), gbc);
+        gbc.gridy++;
         res.add(displayButton(), gbc);
+
         return res;
     }
 
 
 
-
+    // MODIFIES: this
+    // EFFECTS : Adds a welcome label on the panel
     private JLabel addWelcomeLabel() {
         JLabel welcomeLabel = new JLabel("Welcome To Your Transcript Record!!!");
         welcomeLabel.setForeground(Color.WHITE);
@@ -86,20 +91,28 @@ public class StartApplication extends JFrame {
         return welcomeLabel;
     }
 
-
+    // MODIFIES: this
+    // EFFECTS : Adds the load data button
     private JButton loadDataButton() {
         this.loadTerm = new JButton("Load Existing Data");
         Font font = new Font("Arial", Font.ITALIC, 26);
         loadTerm.setFont(font);
         loadTerm.setPreferredSize(new Dimension(650, buttonHeight));
-        JFrame frame = new JFrame("Loading Data ...");
-        loadTerm.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Data Loaded successfully",
-                "Success",
-                JOptionPane.INFORMATION_MESSAGE));
+        loadTerm.addActionListener(e -> {
+            try {
+                dispose();
+                new LoadData();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
         return loadTerm;
+
     }
 
-
+    // MODIFIES: this
+    // EFFECTS : Adds the button to add a new term
     private JButton addTermButton() {
         this.addTerm = new JButton("Add a new Term");
         Font font = new Font("Arial", Font.ITALIC, 26);
@@ -116,6 +129,8 @@ public class StartApplication extends JFrame {
         return addTerm;
     }
 
+    // MODIFIES: this
+    // EFFECTS : Adds the button to add a new subject
     private JButton addSubButton() {
         this.addSub = new JButton("Add a new Subject");
         Font font = new Font("Arial", Font.ITALIC, 26);
@@ -132,6 +147,8 @@ public class StartApplication extends JFrame {
         return addSub;
     }
 
+    // MODIFIES: this
+    // EFFECTS : Adds the button to add a new Graded component
     private JButton addGCButton() {
         this.addGC = new JButton("Add a new Graded Component");
         Font font = new Font("Arial", Font.ITALIC, 26);
@@ -149,6 +166,27 @@ public class StartApplication extends JFrame {
 
     }
 
+
+    // MODIFIES: this
+    // EFFECTS : Adds the button to calculate the term averages
+    private JButton termAverage() {
+        this.termAverage = new JButton("Calculate term average");
+        Font font = new Font("Arial", Font.ITALIC, 26);
+        termAverage.setFont(font);
+        termAverage.setPreferredSize(new Dimension(650, buttonHeight));
+        termAverage.addActionListener(e -> {
+            try {
+                dispose();
+                new TermAverage();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        return termAverage;
+    }
+
+    // MODIFIES: this
+    // EFFECTS : Adds the display button
     protected JButton displayButton() {
         this.displayTranscript = new JButton("Display Transcript");
         Font font = new Font("Arial", Font.ITALIC, 26);
