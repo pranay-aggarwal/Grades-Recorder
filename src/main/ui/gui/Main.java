@@ -1,10 +1,6 @@
 package ui.gui;
 
-import model.Term;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -16,7 +12,7 @@ public class Main {
     // EFFECTS: Runs the graphical user interface of the app
     public static void main(String[] args) {
         try {
-            StartApplication startApplication = new StartApplication();
+            new StartApplication();
         } catch (IOException e) {
             e.printStackTrace();
         }

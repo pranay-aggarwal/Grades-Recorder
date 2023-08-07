@@ -1,8 +1,9 @@
-package ui.gui;
+package ui.gui.buttons;
 
 import model.GradedComponent;
 import model.Subject;
 import model.Term;
+import ui.gui.StartApplication;
 
 import javax.swing.*;
 import java.awt.*;
@@ -74,7 +75,7 @@ public class AddGcGUI extends StartApplication {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                handleSub(nameField, frame);
+                handleSub(nameField);
             }
         });
         makePanelSub(nameLabel, nameField, submitButton, frame);
@@ -90,7 +91,7 @@ public class AddGcGUI extends StartApplication {
     // REQUIRES: all the JTextFields and JFrame
     // MODIFIES: this
     // EFFECTS: handles the subject fields and creates a popup for GC fields
-    private void handleSub(JTextField nameField, JFrame frame) {
+    private void handleSub(JTextField nameField) {
         subName = nameField.getText();
 
         for (Term t : termList) {

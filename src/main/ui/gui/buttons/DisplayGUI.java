@@ -1,6 +1,7 @@
-package ui.gui;
+package ui.gui.buttons;
 
 import model.Term;
+import ui.gui.StartApplication;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -14,17 +15,20 @@ import java.io.IOException;
 public class DisplayGUI extends StartApplication {
 
 
-    // EFFECTS: Displays the result of the transcript data in a pop up message box
+    // EFFECTS: Displays the result of the transcript data in a pop-up message box
     public DisplayGUI() throws IOException {
+        ImageIcon icon = new ImageIcon("images/img1.jpg");
+
         String result = "";
         for (Term term : termList) {
             result += term.toString();
         }
 
         JFrame frame = new JFrame("Your Transcript");
+
         JOptionPane.showMessageDialog(frame, result,
                 "Your Transcript",
-                JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.PLAIN_MESSAGE,icon);
 
 
 

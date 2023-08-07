@@ -1,7 +1,8 @@
-package ui.gui;
+package ui.gui.buttons;
 
 import model.Subject;
 import model.Term;
+import ui.gui.StartApplication;
 
 import javax.swing.*;
 import java.awt.*;

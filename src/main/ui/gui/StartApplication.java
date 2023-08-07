@@ -2,9 +2,13 @@ package ui.gui;
 
 import model.Term;
 import persistence.TermFileHandler;
+import ui.gui.buttons.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +28,10 @@ public class StartApplication extends JFrame {
     private JButton termAverage;
     protected final int dimX = 1920; // represents the width of the JFrame
     protected final int dimY = 1080; // represents the height of the JFrame
-    private int buttonHeight = 80;
+    private final int buttonHeight = 80;
+
+
+
 
     protected final String termPath = "./data/data.json";
     protected TermFileHandler termFile = new TermFileHandler(termPath);
@@ -43,14 +50,38 @@ public class StartApplication extends JFrame {
         JPanel panel = addPanel();
         panel.setBackground(Color.decode("#00003f"));
 
+
         this.add(panel);
+
+    }
+
+
+
+    // MODIFIES: this
+    // EFFECTS: creates a background for the panel
+    private JPanel createBackgroundPanel() {
+        JPanel res = new JPanel(new GridBagLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Load the background image
+                try {
+                    BufferedImage image = ImageIO.read(new File("images/bg.jpg"));
+                    // Draw the background image
+                    g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        return res;
     }
 
 
     // MODIFIES: this
     // EFFECTS: Adds relevant buttons and labels on the panel
-    private JPanel addPanel() throws IOException {
-        JPanel res = new JPanel(new GridBagLayout());
+    private void addComponentsToPanel(JPanel panel) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.gridx = 0;
@@ -60,22 +91,30 @@ public class StartApplication extends JFrame {
 
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.gridx++;
-        res.add(addWelcomeLabel(), gbc);
+        panel.add(addWelcomeLabel(), gbc);
         gbc.gridy++;
-        res.add(loadDataButton(), gbc);
+        panel.add(loadDataButton(), gbc);
         gbc.gridy++;
-        res.add(addTermButton(), gbc);
+        panel.add(addTermButton(), gbc);
         gbc.gridy++;
-        res.add(addSubButton(), gbc);
+        panel.add(addSubButton(), gbc);
         gbc.gridy++;
-        res.add(addGCButton(), gbc);
+        panel.add(addGCButton(), gbc);
         gbc.gridy++;
-        res.add(termAverage(), gbc);
+        panel.add(termAverage(), gbc);
         gbc.gridy++;
-        res.add(displayButton(), gbc);
-
-        return res;
+        panel.add(displayButton(), gbc);
     }
+
+
+    // MODIFIES: this
+    // EFFECTS: creates a panel
+    private JPanel addPanel() {
+        JPanel panel = createBackgroundPanel();
+        addComponentsToPanel(panel);
+        return panel;
+    }
+
 
 
 
@@ -203,6 +242,8 @@ public class StartApplication extends JFrame {
         return displayTranscript;
 
     }
+
+
 
 
 

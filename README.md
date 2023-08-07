@@ -31,3 +31,16 @@ the hassle of storing all of this information in my memory.
 - **As a user,** I want to be able to *view* the marks I need to obtain to achieve my desired percentage.
 - **As a user,** I want to be able to *save* my entire transcript so far.
 - **As a user,** I want to be able to *load* my previously saved transcript.
+
+
+# Instructions for Grader
+
+- You can generate the first required action related to adding Xs to a Y by clicking on "add term" button to create a
+new term and add it to termlist
+- You can generate the second required action related to adding Xs to a Y by clicking on "add subject" button to 
+create a new subject and add it to an existing term
+- You can generate the third required action related to adding Xs to a Y by clicking on "add graded component" button to
+create a new gc and add it to an existing subject
+- You can locate my visual component by looking at the images that get displayed during execution of the program
+- You can save the state of my application automatically when u add a new term, subject or graded component
+- You can reload the state of my application by clicking on the "load data button"

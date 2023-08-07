@@ -1,8 +1,10 @@
-package ui.gui;
+package ui.gui.buttons;
 
 import model.Term;
+import ui.gui.StartApplication;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -17,6 +19,10 @@ public class TermAverage extends StartApplication {
 
     // EFFECTS: calculates the average marks for each term and generates a message with the results
     public TermAverage() throws IOException {
+        ImageIcon icon = new ImageIcon("images/gpa.jpeg");
+        Image scaledImage = icon.getImage().getScaledInstance(130, 200, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
         for (Term t : termList) {
             double result = t.averageSub();
             int year = t.getYear();
@@ -25,7 +31,7 @@ public class TermAverage extends StartApplication {
         }
 
         JFrame frame = new JFrame("Transcript Averages");
-        JOptionPane.showMessageDialog(frame, message, "Averages", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(frame, message, "Averages", JOptionPane.PLAIN_MESSAGE, scaledIcon);
     }
 
 }
