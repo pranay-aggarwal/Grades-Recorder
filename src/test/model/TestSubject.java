@@ -140,5 +140,26 @@ public class TestSubject {
 
     }
 
+    @Test
+    public void testEquals() {
+        Subject sameSubject = new Subject("CPSC210", 95);
+        Subject differentSubject = new Subject("CPSC110", 85);
+        Subject differentMarksSubject = new Subject("CPSC210", 80);
+
+        assertTrue(Sub1.equals(Sub1));
+        assertTrue(Sub1.equals(sameSubject));
+        assertFalse(Sub1.equals(differentSubject));
+        assertTrue(Sub1.equals(differentMarksSubject));
+    }
+
+    @Test
+    public void testHashCode() {
+        Subject sameSubject = new Subject("CPSC210", 95);
+        Subject differentSubject = new Subject("CPSC110", 85);
+        assertEquals(Sub1.hashCode(), Sub1.hashCode());
+        assertEquals(Sub1.hashCode(), sameSubject.hashCode());
+        assertNotEquals(Sub1.hashCode(), differentSubject.hashCode());
+    }
+
 
 }

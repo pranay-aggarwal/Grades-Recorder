@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This is a test class for Term
@@ -149,6 +148,30 @@ public class TestTerm {
         expected.put("subjects", termList);
         JSONObject actualJson = term.toJson();
         assertEquals(expected.toString(),actualJson.toString());
+    }
+
+
+    @Test
+    public void testEquals() {
+        Term sameTerm = new Term(2023, 1);
+        Term differentTerm = new Term(2022, 2);
+        Term differentSubjectsTerm = new Term(2023, 1);
+        differentSubjectsTerm.addSubject(Sub2);
+
+        assertTrue(T1.equals(T1));
+        assertTrue(T1.equals(sameTerm));
+        assertFalse(T1.equals(differentTerm));
+        assertTrue(T1.equals(differentSubjectsTerm));
+    }
+
+    @Test
+    public void testHashCode() {
+        Term sameTerm = new Term(2023, 1);
+        Term differentTerm = new Term(2022, 2);
+
+        assertEquals(T1.hashCode(), T1.hashCode());
+        assertEquals(T1.hashCode(), sameTerm.hashCode());
+        assertNotEquals(T1.hashCode(), differentTerm.hashCode());
     }
 
 
