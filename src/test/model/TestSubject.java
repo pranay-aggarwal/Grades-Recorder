@@ -150,6 +150,7 @@ public class TestSubject {
         assertTrue(Sub1.equals(sameSubject));
         assertFalse(Sub1.equals(differentSubject));
         assertTrue(Sub1.equals(differentMarksSubject));
+        assertFalse(Sub1.equals("Not a Subject object"));
     }
 
     @Test

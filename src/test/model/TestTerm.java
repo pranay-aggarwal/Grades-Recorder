@@ -154,14 +154,18 @@ public class TestTerm {
     @Test
     public void testEquals() {
         Term sameTerm = new Term(2023, 1);
+        Term differentYear= new Term(2022,1);
         Term differentTerm = new Term(2022, 2);
-        Term differentSubjectsTerm = new Term(2023, 1);
+        Term differentSubjectsTerm = new Term(2023, 2);
         differentSubjectsTerm.addSubject(Sub2);
 
         assertTrue(T1.equals(T1));
         assertTrue(T1.equals(sameTerm));
+        assertFalse(T1.equals(differentYear));
         assertFalse(T1.equals(differentTerm));
-        assertTrue(T1.equals(differentSubjectsTerm));
+        assertFalse(T1.equals(differentSubjectsTerm));
+        assertFalse(T1.equals("Not a Term object"));
+
     }
 
     @Test
