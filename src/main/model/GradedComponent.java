@@ -1,8 +1,7 @@
 package model;
 
 
-import log.Event;
-import log.EventLog;
+
 import org.json.JSONObject;
 import persistence.Writable;
 
@@ -78,6 +77,7 @@ public class GradedComponent implements Writable {
     }
 
     ////
+
 
     // Persistence code
     @Override

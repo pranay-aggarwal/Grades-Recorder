@@ -54,8 +54,16 @@ public class TestEvent {
     }
 
     @Test
-    public void TestHashCode() {
-        assertNotEquals(-10549187, e1.hashCode());
+    public void TestEqualsWithDifferentDescription() {
+        Event differentDescriptionEvent = new Event("Different description");
+        assertFalse(e1.equals(differentDescriptionEvent));
+    }
+
+    @Test
+    public void TestEqualsWithBothDifferentFields() {
+        Event differentFieldsEvent = new Event("Different description");
+        differentFieldsEvent.getDate().setTime(differentFieldsEvent.getDate().getTime() + 1000);
+        assertFalse(e1.equals(differentFieldsEvent));
     }
 
 
@@ -65,4 +73,19 @@ public class TestEvent {
         Event e4 = new Event("Subject added");
         assertTrue(e4.equals(e3));
     }
+
+    @Test
+    public void TestToString() {
+        String expectedString1 = Calendar.getInstance().getTime().toString() + "\nSubject added";
+        String expectedString2 = Calendar.getInstance().getTime().toString() + "\nGC added";
+
+        assertEquals(expectedString1, e1.toString());
+        assertEquals(expectedString2, e2.toString());
+    }
+
+    @Test
+    public void TestHashCode() {
+        assertNotEquals(-10549187, e1.hashCode());
+    }
+
 }

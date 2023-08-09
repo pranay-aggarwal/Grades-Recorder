@@ -9,7 +9,7 @@ import java.io.IOException;
 // Runs the console using StartYear
 public class Main {
     public static void main(String[] args) throws IOException {
-        StartYear startYear = new StartYear();
+        new StartYear();
     }
 }
 

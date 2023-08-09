@@ -75,6 +75,7 @@ Process finished with exit code 0
 ## Phase 4: Task 3
 
 ### UML Class Diagram
+<img height="475" src="images/UML_Design_Diagram.png" width="800"/>
 
 
 ### Potential Design Improvements
