@@ -49,23 +49,23 @@ create a new gc and add it to an existing subject
 ## Phase 4: Task 2
 ### Sample Logging of Events
 ~~~
-Tue Aug 08 18:02:17 PDT 2023
+Wed Aug 09 16:00:45 PDT 2023
 Subject: POLI added to:  2023-T1
 -------------------------------------------------------------
-Tue Aug 08 18:02:50 PDT 2023
+Wed Aug 09 16:00:05 PDT 2023
 Graded Component:  quiz added to POLI
 -------------------------------------------------------------
-Tue Aug 08 18:02:55 PDT 2023
-Average calculated for:  2023 term num: 1
+Wed Aug 09 16:01:07 PDT 2023
+Average 47.6 calculated for:  2023 term num: 1
 -------------------------------------------------------------
-Tue Aug 08 18:02:55 PDT 2023
-Average calculated for:  2023 term num: 2
+Wed Aug 09 16:01:07 PDT 2023
+Average 47.45 calculated for:  2023 term num: 2
 -------------------------------------------------------------
-Tue Aug 08 18:02:55 PDT 2023
-Average calculated for:  2024 term num: 1
+Wed Aug 09 16:01:07 PDT 2023
+Average 0.0 calculated for:  2024 term num: 1
 -------------------------------------------------------------
-Tue Aug 08 18:02:55 PDT 2023
-Average calculated for:  2025 term num: 2
+Wed Aug 09 16:01:07 PDT 2023
+Average 9.7 calculated for:  2025 term num: 2
 -------------------------------------------------------------
 
 Process finished with exit code 0
@@ -86,3 +86,5 @@ of each button
 a single abstract class that defines shared functions
 - The termList field can be simplified by using singleton method as we only need one instance of it every time we run
 the code.
+- A separate save button can be added in the GUI to reduce the repetition. 
+- Different datatype can be explored for term, subject and graded components. 

@@ -50,7 +50,7 @@ public class Term implements Writable {
             sum += s.averageGradedComp();
         }
         sum = sum / subjects.size();
-        EventLog.getInstance().logEvent(new Event("Average calculated for:  "
+        EventLog.getInstance().logEvent(new Event("Average " + sum + " calculated for:  "
                 + getYear() + " term num: " + getTermNum()
                 + "\n-------------------------------------------------------------"));
         return sum;
