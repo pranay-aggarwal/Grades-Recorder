@@ -25,8 +25,9 @@ public class StartYear {
 
 
     List<Term> terms = new ArrayList<>();
-    final String filePath = "data/data.json";
     ArrayList<Subject> existingSubjects = new ArrayList<>();
+
+    final String filePath = "data/data.json";
     TermFileHandler fileHandler = new TermFileHandler(filePath);
 
     // EFFECT: call the StartYear app and display possible menu options

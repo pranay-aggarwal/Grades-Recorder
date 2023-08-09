@@ -1,6 +1,8 @@
 package model;
 
 
+import log.Event;
+import log.EventLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -37,6 +39,9 @@ public class Subject implements Writable {
     //EFFECTS : add a new Graded Component to the Term
     public void addGradedComp(GradedComponent component) {
         this.listOfGradedComp.add(component);
+        EventLog.getInstance().logEvent(new Event("Graded Component:  "
+                + component.getCompName() + " added to " + getSubName()
+                + "\n-------------------------------------------------------------"));
     }
 
 

@@ -1,5 +1,7 @@
 package ui.gui;
 
+import log.Event;
+import log.EventLog;
 import model.Term;
 import persistence.TermFileHandler;
 import ui.gui.buttons.*;
@@ -7,6 +9,8 @@ import ui.gui.buttons.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -47,12 +51,25 @@ public class StartApplication extends JFrame {
         this.setVisible(true);
         this.setResizable(true);
         this.setSize(dimX, dimY);
+        windowListener();
         JPanel panel = addPanel();
         panel.setBackground(Color.decode("#00003f"));
 
 
         this.add(panel);
 
+    }
+
+    // EFFECTS: adds the window listener to the JFrame
+    private void windowListener() {
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                for (Event el : EventLog.getInstance()) {
+                    System.out.println(el.toString());
+                }
+            }
+        });
     }
 
 

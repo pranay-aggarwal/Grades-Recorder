@@ -33,7 +33,7 @@ the hassle of storing all of this information in my memory.
 - **As a user,** I want to be able to *load* my previously saved transcript.
 
 
-# Instructions for Grader
+## Instructions for Grader
 
 - You can generate the first required action related to adding Xs to a Y by clicking on "add term" button to create a
 new term and add it to termlist
@@ -44,3 +44,44 @@ create a new gc and add it to an existing subject
 - You can locate my visual component by looking at the images that get displayed during execution of the program
 - You can save the state of my application automatically when u add a new term, subject or graded component
 - You can reload the state of my application by clicking on the "load data button"
+
+
+## Phase 4: Task 2
+### Sample Logging of Events
+~~~
+Tue Aug 08 18:02:17 PDT 2023
+Subject: POLI added to:  2023-T1
+-------------------------------------------------------------
+Tue Aug 08 18:02:50 PDT 2023
+Graded Component:  quiz added to POLI
+-------------------------------------------------------------
+Tue Aug 08 18:02:55 PDT 2023
+Average calculated for:  2023 term num: 1
+-------------------------------------------------------------
+Tue Aug 08 18:02:55 PDT 2023
+Average calculated for:  2023 term num: 2
+-------------------------------------------------------------
+Tue Aug 08 18:02:55 PDT 2023
+Average calculated for:  2024 term num: 1
+-------------------------------------------------------------
+Tue Aug 08 18:02:55 PDT 2023
+Average calculated for:  2025 term num: 2
+-------------------------------------------------------------
+
+Process finished with exit code 0
+~~~
+
+
+## Phase 4: Task 3
+
+### UML Class Diagram
+
+
+### Potential Design Improvements
+- In the GUI package of the code, in the StartApplication class, we can refactor the code for the buttons as there is a 
+lot of repetition and redundancy. To fix this, we can extract a single new method and call it in every separate call 
+of each button
+- The code for Subject, Term and Graded Component share a lot of similar code which can be simplified by creating 
+a single abstract class that defines shared functions
+- The termList field can be simplified by using singleton method as we only need one instance of it every time we run
+the code.

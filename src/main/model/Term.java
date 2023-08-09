@@ -1,6 +1,8 @@
 package model;
 
 
+import log.Event;
+import log.EventLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -35,6 +37,9 @@ public class Term implements Writable {
     //EFFECTS : add a new subject to the Term
     public void addSubject(Subject subject) {
         this.subjects.add(subject);
+        EventLog.getInstance().logEvent(new Event("Subject: " + subject.getSubName() + " added to:  "
+                + getYear() + "-T" + getTermNum()
+                + "\n-------------------------------------------------------------"));
     }
 
 
@@ -45,6 +50,9 @@ public class Term implements Writable {
             sum += s.averageGradedComp();
         }
         sum = sum / subjects.size();
+        EventLog.getInstance().logEvent(new Event("Average calculated for:  "
+                + getYear() + " term num: " + getTermNum()
+                + "\n-------------------------------------------------------------"));
         return sum;
     }
 
@@ -65,11 +73,7 @@ public class Term implements Writable {
         return "-------------------------------------------------------" + "\n"
                 + "Year: " + year + " Term Number: " + termNum + "\n"
                 + "-------------------------------------------------------" + "\n"
-                + toStringSubjects(subjects)
-
-
-
-                ;
+                + toStringSubjects(subjects);
     }
 
 
