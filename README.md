@@ -33,7 +33,7 @@ the hassle of storing all of this information in my memory.
 - **As a user,** I want to be able to *load* my previously saved transcript.
 
 
-## Instructions for Grader
+## Instructions for User
 
 - You can generate the first required action related to adding Xs to a Y by clicking on "add term" button to create a
 new term and add it to termlist
